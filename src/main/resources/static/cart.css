@@ -1,0 +1,13 @@
+
+.btn {
+    background: #078f5f;
+    border: 2px solid #078f5f !important;
+    color: #fff !important;
+    background-color: #078f5f !important;
+    
+}
+.btn_action
+{
+    width: 60px !important;
+    align-items: center !important;
+}

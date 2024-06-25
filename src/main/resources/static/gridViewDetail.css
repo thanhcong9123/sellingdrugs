@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.product-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-imagedetail img {
+    height: 100%;
+    width: 250px;
+}
+
+.product-details {
+    padding: 20px;
+    flex: 1;
+}
+
+.product-details h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.discount {
+    color: #ff0000;
+    margin-left: 10px;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.options, .size, .quantity {
+    margin-bottom: 20px;
+}
+
+.options select, .quantity input {
+    padding: 8px;
+    margin-right: 10px;
+}
+
+.size button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.size button:hover {
+    background-color: #ddd;
+}
+
+.add-to-cart {
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-to-cart:hover {
+    background-color: #218838;
+}
+.fancybox-overlay {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 9000;
+    background: #000000b3;
+}
+.fancybox-overlay-fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+.product-container
+{
+        width: 880px;
+        height: auto;
+        position: absolute;
+        left: 20%;
+        top: 10%;
+        /* right: 30%; */
+        opacity: 1;
+        overflow: visible;
+        z-index: 9000;
+    
+}
+.fancybox-close {
+    width: 24px;
+    height: 24px;
+    display: block;
+    border: none;
+    border-radius: 5px;
+}
+.fancybox-close {
+  
+    right: -12px;
+    width: 36px;
+    height: 36px;
+}
+.fancybox-close, .fancybox-nav, .fancybox-nav span {
+    cursor: pointer;
+    z-index: 9001;
+    position: absolute;
+}

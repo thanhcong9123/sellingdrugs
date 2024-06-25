@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" th:href="@{/header.css}" >
+    <link rel="stylesheet" th:href="@{/catalog.css}" >
+    <link rel="stylesheet" th:href="@{/footer.css}" >
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <div class="collection_info_wrapper">
+			<div class="collection_info">
+                <div class="collection_text ">
+                    <div>
+                        <h1 class="collection_title" th:text="${categoryName}">Products</h1>
+                    </div>
+                </div>
+            </div>
+		</div>
+        <div class="row" style="min-height:500px ;">
+            <div class="main_content sidebar_on col-md-9 col-lg-9 left-sidebar">
+                <div class="shopify-section section_template section_template__collection">
+                    <div class="product_options">
+                        <div class="product_options__sort">
+                            <label for="sort_by_select">Sort by:</label>
+                                <div class="select-wrapper">
+                                    <select class="form-control" id="sort_by_select">
+                                        <option ><a th:href="@{/products/categories(categoryName=${categoryName})}">Featured</a></option>
+                                        <option th:href="@{/products/categories(categoryName=${categoryName})}">Featured</option>
+
+                                    </select>
+                                    <div class="select-arrow-1"></div>
+                                </div>
+                        </div>
+                    </div>
+                     <div class="row product_listing__main"  >
+                            <div class="product_item col-lg-4 col-sm-4 col-md-4 col-6" th:each="product : ${listProduct}" id="product__dark-chocolate-square">
+                                <div class="product_item">
+                                    <div class="product_img_wrap">
+                                        <div class="product_img">
+                                            <a class="img_change" th:href="@{/products/{productId}(productId=${product.productId})}">
+                                                <img class=" ls-is-cached lazyloaded" th:src="${product.img}">
+                    
+                                            </a>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="product_info">
+                    
+                                    <div class="product_color"></div>
+                    
+                                        <p class="product_name">
+                                            <a th:href="@{/products/{productId}(productId=${product.productId})}" th:text="${product.name}">Dark Chocolate Square</a>
+                                        </p>
+                                        <p class="product_price">
+                                            <span class="money main_price" data-currency-usd="$180.00" th:text="${product.price}"></span> <span
+                                                class="money_like main_price"></span>
+                                        </p>
+                                        <form method="post" action="/products/" class="add_to_cart_form">
+                    
+                    
+                                            <a class="btn btn_options js_quick_view"
+                                                th:href="@{/products/{productId}(productId=${product.productId})}">
+                                                <span>
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">Choose variant</font>
+                                                    </font>
+                                                </span>
+                                                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                    d="M0.777344 6.77789V5.22233H10.1107L6.99957 2.11122L7.77734 0.555664L13.2218 6.00011L7.77734 11.4446L6.99957 9.889L10.1107 6.77789H0.777344Z"
+                                                    fill="white"></path>
+                                                </svg>
+                                            </a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div>
+                    <a th:href="@{/products/categories(page=${listProduct.number - 1}, size=${listProduct.size},categoryName=${categoryName})}"
+                       th:if="${listProduct.hasPrevious()}">Previous</a>
+                    <span>Page <span th:text="${listProduct.number + 1}">1</span> of <span th:text="${listProduct.totalPages}">1</span></span>
+                    <a th:href="@{/products/categories(page=${listProduct.number + 1}, size=${listProduct.size},categoryName=${categoryName})}"
+                       th:if="${listProduct.hasNext()}">Next</a>
+                </div>
+            </div>
+            <div class="sidebar_small col-md-3 col-lg-3">
+                <div class="shopify-section page_sidebar">
+                    <div class="sidebar">
+                        <div class="sidebar_widget sidebar_widget__collections">
+                            <h6 class="widget_header linklist_menu_title">Collections</h6>
+                            <div class="widget_content">
+                                <ul class="list_links" >
+                                        <li th:each="listCategories : ${listCategories}"><a th:href="@{/products/categories(categoryName=${listCategories.name})}" th:text="${listCategories.name}"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+    <div th:replace="fragments/footer :: footer"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+		function searchViaAjax() {
+
+			var name = $("#query").val();
+
+			$.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "${home}home/search/",
+				data : {
+					name : name
+				},
+				dataType : 'json',
+				timeout : 100000,
+				success : function(data) {
+				
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

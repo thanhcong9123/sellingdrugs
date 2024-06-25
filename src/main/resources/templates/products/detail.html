@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" th:href="@{/header.css}" >
+    <link rel="stylesheet" th:href="@{/detail.css}" >
+    <link rel="stylesheet" th:href="@{/footer.css}" >
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="#">Home</a> / <a href="#">Collections</a> / <a href="#">Hybrid strain</a> 
+        </div>
+        <form method="post" enctype="multipart/form-data" th:object="${orderdetails}" th:action="@{/products/detailcart(idProduct=${product.productId})}">
+        <div class="product-header">
+            <h1 th:text="${product.name}">Product Name</h1>
+            <div class="product-price">
+                <span th:text="${product.price}">$0.00 </span>
+            </div>
+        </div>
+        <div class="product-images">
+            <img th:src="@{${product.img}}" alt="Product Image">
+        </div>
+        <div class="product-details">
+            <p><strong>Product type:</strong> <span th:text="${product.category.name}"></span></p>
+            <p><strong>Tags:</strong> Drops, Herbal</p>
+            <p><strong>Collections:</strong> High thc, Hybrid strain, Indica strain, Personal care, Sativa strain</p>
+          
+            <div class="product-buttons">
+                <button>Add to Cart</button>
+           
+            </div>
+        </div>
+    </form>
+
+        <div class="product-description">
+            <h2>Description</h2>
+            <p th:text="${product.description}">Product Description</p>
+        </div>
+        <div class="product-description">
+            <div class="sticky_block">
+
+                <div class="rte">
+                    <h4 class="wrap_triger">Delivery</h4>
+                    <div class="wrap_content">
+                        <meta charset="utf-8">
+                        <p>So you’ve done your shopping; just how long will it be till you can rock that swanky new Axolotl-themed
+                            laptop skin? The calculator below will give you the average amount of days it takes to ship a product to
+                            your door and the best time to contact our support team. Please note that every order at Redbubble is
+                            custom printed just for you, and will take 1-3 business days to print prior to shipping.</p>
+                        <span class="heading-5">Here are a few things to consider while you wait for your
+                            order:</span><span></span><span></span><span></span>
+                        <ul>
+                            <li><span>We ship in business days. Monday - Friday, excluding national holidays.</span></li>
+                            <li><span>Shipping starts from the date you received the “Your Order Has Shipped!” email.</span></li>
+                            <li><span>The estimate above does not include manufacturing time - we need 1-3 business days to make
+                                    sure your custom order is everything you hoped it would be.</span></li>
+                        </ul>
+                        <p>Redbubble is a global company - we work with production and shipping partners all over the world to get
+                            your things to your doorstep, wherever that may be. Although the vast majority of our customers will get
+                            their orders by the day listed above, actual timeframes may vary from region to region.</p>
+                        <div class="shipping-delivery-page__border">
+                            <span class="heading-5">So when do you contact Redbubble?</span><span> </span><span>The calculator above
+                                lets you know the best time to message us. When that day rolls around.</span><span>
+                            </span><span>Even if your order hasn’t arrived by the listed date, it’s probably still on its way (and
+                                worth the wait).</span>
+                        </div>
+                        <div class="shipping-delivery-page__border"><span></span></div>
+                        <ol class="shipping-delivery-page__list">
+                            <li>
+                                <span class="heading-5 themeicon-transportation_truck-front">How much is shipping?</span>
+                                <p>Once you’ve clicked through to Secure Checkout, you can enter your delivery address and choose a
+                                    shipping method. Shipping costs are then calculated and tacked on to your subtotal at the bottom
+                                    of the page.</p>
+                            </li>
+                            <li>
+                                <span class="heading-5 themeicon-ui-1_zoom">Can I track my order?</span>
+                                <p>We rely on a global network of shipping partners (UPS, FedEx, DHL) as well as local postal
+                                    services (USPS) to get your order to your doorstep as soon as possible. For this reason,
+                                    tracking is not always available. If your order is being sent by a trackable service, these
+                                    details will be included on your orders page as well as on the shipping email we send you.</p>
+                            </li>
+                            <li>
+                                <span class="heading-5 themeicon-files_archive-check">Where does my order ship from?</span>
+                                <p>We rely on a global network of shipping partners (UPS, FedEx, DHL) as well as local postal
+                                    services (USPS) to get your order to your doorstep as soon as possible. For this reason,
+                                    tracking is not always available. If your order is being sent by a trackable service, these
+                                    details will be included on your orders page as well as on the shipping email we send you.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            
+            
+            </div>
+        </div>
+        <div class="product-reviews">
+            <h2>Reviews</h2>
+            <div th:each="review : ${product.reviews}">
+                <div class="review">
+                    <div class="review-header">
+                        <strong th:text="${review.userId}">User ID</strong>
+                        <span th:text="${#dates.format(review.date, 'yyyy-MM-dd')}">Date</span>
+                    </div>
+                    <div class="review-body">
+                        <p th:text="${review.comment}">Review Comment</p>
+                        <p><strong>Rating:</strong> <span th:text="${review.rating}">Rating</span>/5</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container">
+        <h3>Related product
+        </h3>
+        
+        <div class="performer">
+            <div th:each="bestSeller : ${listCategories}"> 
+                <div class="swiper-slide" style="width: 220px;margin-right: 20px;">
+                <div class="product_item" id="product__dark-chocolate-square">
+                    <div class="product_img_wrap">
+                        <div class="product_img">
+                            <a class="img_change" href="/collections/beauty/products/dark-chocolate-square">
+            
+                                <img class=" ls-is-cached lazyloaded"
+                                    th:src="${bestSeller.img}"
+                                >
+                            </a>
+                        </div>
+                    </div>
+            
+                    <div class="product_info">
+                     
+                        <div class="product_color"></div>
+            
+                        <p class="product_name">
+                            <a href="/products/dark-chocolate-square" th:text="${bestSeller.name}"></a>
+                        </p>
+                        <p class="product_price">
+                            <span class="money main_price" data-currency-usd="$180.00" th:text="${bestSeller.price}"></span> <span
+                                class="money_like main_price"></span> 
+                        </p>
+                        <form method="post" action="/products/" class="add_to_cart_form" >
+                            <a class="btn btn_options js_quick_view" th:href="@{/products/{productId}(productId=${bestSeller.productId})}">
+                                <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Choose variant</font></font></span>
+                                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.777344 6.77789V5.22233H10.1107L6.99957 2.11122L7.77734 0.555664L13.2218 6.00011L7.77734 11.4446L6.99957 9.889L10.1107 6.77789H0.777344Z" fill="white"></path>
+                                </svg>
+                            </a>
+                        
+                    
+                        </form>
+                    </div>
+                </div>
+            
+                </div>
+        </div>
+        </div>
+    </div>
+  <div th:replace="fragments/footer :: footer"></div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
+<script>
+    $('.performer').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        nextArrow: `<div class=" slick-arrow click-previous">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path
+                        d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941
+                        0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484
+                        101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941
+                        0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z">
+                        </path>
+                        </svg>
+                        </div> `,
+        prevArrow: `<div class="slick-arrow click-next  pull-right type='button'">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path
+                        d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04
+                        33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57
+                        9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
+                        </path>
+                        </svg>
+                        </div> `
+    });
+</script>
